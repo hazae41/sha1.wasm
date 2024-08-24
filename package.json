@@ -1,0 +1,63 @@
+{
+  "type": "module",
+  "name": "@hazae41/sha1.wasm",
+  "version": "1.0.3",
+  "description": "WebAssembly port of Sha1",
+  "homepage": "https://github.com/hazae41/sha1.wasm",
+  "repository": "github:hazae41/sha1.wasm",
+  "author": "hazae41",
+  "license": "Unlicense",
+  "main": "./dist/cjs/node/index.cjs",
+  "module": "./dist/esm/node/index.mjs",
+  "types": "./dist/types/node/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "./dist/esm",
+    "./dist/cjs",
+    "./dist/types",
+    "./dist/wasm"
+  ],
+  "scripts": {
+    "build:wasm": "cd ./src/wasm && rimraf pkg && wasm-pack build --target web --release && cd ../.. && node patch.wasm.mjs",
+    "build:node": "rimraf dist && rollup -c && rsync -a ./src/wasm ./dist --exclude=target --exclude=pkg && node patch.node.mjs",
+    "build": "npm run build:wasm && npm run build:node",
+    "test": "node ./dist/test/node/index.test.mjs",
+    "prepare": "npm run build:node"
+  },
+  "devDependencies": {
+    "@hazae41/deimos": "^1.0.6",
+    "@hazae41/phobos": "^1.0.10",
+    "@hazae41/rimraf": "^1.0.1",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^22.5.0",
+    "rollup": "^4.21.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-node-externals": "^7.1.3",
+    "typescript": "^5.5.4"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/types/node/index.d.ts",
+      "import": "./dist/esm/node/index.mjs",
+      "require": "./dist/cjs/node/index.cjs"
+    }
+  },
+  "keywords": [
+    "reproducible",
+    "webassembly",
+    "cryptography",
+    "incremental",
+    "hash",
+    "hashing",
+    "sha1",
+    "sha-1",
+    "browser",
+    "typescript",
+    "rust",
+    "unit-tested",
+    "deno"
+  ],
+  "peerDependencies": {
+    "@hazae41/memory.wasm": "^1.0.9"
+  }
+}
