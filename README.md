@@ -16,6 +16,9 @@ npm i @hazae41/sha1.wasm
 ## Modules
 - sha1
 
+## Algorithms
+- SHA-1 (direct and incremental)
+
 ## Usage
 
 ### Direct
