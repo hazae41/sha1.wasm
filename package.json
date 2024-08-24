@@ -2,7 +2,7 @@
   "type": "module",
   "name": "@hazae41/sha1.wasm",
   "version": "1.0.5",
-  "description": "WebAssembly port of Sha1",
+  "description": "WebAssembly port of SHA-1",
   "homepage": "https://github.com/hazae41/sha1.wasm",
   "repository": "github:hazae41/sha1.wasm",
   "author": "hazae41",

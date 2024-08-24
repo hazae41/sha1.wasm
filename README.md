@@ -1,6 +1,6 @@
 # sha1.wasm
 
-WebAssembly port of Sha1
+WebAssembly port of SHA-1
 
 ```bash
 npm i @hazae41/sha1.wasm

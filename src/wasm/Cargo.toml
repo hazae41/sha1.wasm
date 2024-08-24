@@ -4,7 +4,7 @@ version = "1.0.0"
 authors = ["hazae41 <4405263+hazae41@users.noreply.github.com>"]
 edition = "2021"
 
-description = "WebAssembly port of Sha1"
+description = "WebAssembly port of SHA-1"
 repository = "https://github.com/hazae41/sha1.wasm"
 license = "Unlicense"
 

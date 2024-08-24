@@ -4,7 +4,7 @@
   "collaborators": [
     "hazae41 <4405263+hazae41@users.noreply.github.com>"
   ],
-  "description": "WebAssembly port of Sha1",
+  "description": "WebAssembly port of SHA-1",
   "version": "1.0.0",
   "license": "Unlicense",
   "repository": {
