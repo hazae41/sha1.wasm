@@ -42,7 +42,7 @@ function passArray8ToWasm0(arg, malloc) {
     return ptr;
 }
 
-const MemoryFinalization = (typeof FinalizationRegistry === 'undefined')
+const MemoryFinalization = true
     ? { register: () => {}, unregister: () => {} }
     : new FinalizationRegistry(ptr => wasm.__wbg_memory_free(ptr >>> 0, 1));
 
@@ -52,49 +52,71 @@ export class Memory {
         ptr = ptr >>> 0;
         const obj = Object.create(Memory.prototype);
         obj.__wbg_ptr = ptr;
-        MemoryFinalization.register(obj, obj.__wbg_ptr, obj);
+        MemoryFinalization;
         return obj;
     }
 
     __destroy_into_raw() {
         const ptr = this.__wbg_ptr;
         this.__wbg_ptr = 0;
-        MemoryFinalization.unregister(this);
+        this.__wbg_ptr0 = 0;
+        this.__wbg_len0 = 0;
+        MemoryFinalization;
         return ptr;
     }
 
-    free() {
+    [Symbol.dispose]() {
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_memory_free(ptr, 0);
     }
     /**
-     * @param {Uint8Array} inner
-     */
+    * @param {Uint8Array} inner
+    */
     constructor(inner) {
         const ptr0 = passArray8ToWasm0(inner, wasm.__wbindgen_malloc);
         const len0 = WASM_VECTOR_LEN;
         const ret = wasm.memory_new(ptr0, len0);
         this.__wbg_ptr = ret >>> 0;
-        MemoryFinalization.register(this, this.__wbg_ptr, this);
+        this.__wbg_ptr0 = ptr0 >>> 0;
+        this.__wbg_len0 = len0 >>> 0;
+        MemoryFinalization;
         return this;
     }
     /**
-     * @returns {number}
-     */
+    * @returns {number}
+    */
     ptr() {
         const ret = wasm.memory_ptr(this.__wbg_ptr);
         return ret >>> 0;
     }
     /**
-     * @returns {number}
-     */
+    * @returns {number}
+    */
     len() {
         const ret = wasm.memory_len(this.__wbg_ptr);
         return ret >>> 0;
     }
+    /**
+    * @returns {number}
+    */
+    get ptr0() {
+        return this.__wbg_ptr0 ??= this.ptr();
+    }
+    /**
+    * @returns {number}
+    */
+    get len0() {
+        return this.__wbg_len0 ??= this.len();
+    }
+    /**
+    * @returns {Uint8Array}
+    */
+    get bytes() {
+        return getUint8ArrayMemory0().subarray(this.ptr0, this.ptr0 + this.len0);
+    }
 }
 
-const Sha1HasherFinalization = (typeof FinalizationRegistry === 'undefined')
+const Sha1HasherFinalization = true
     ? { register: () => {}, unregister: () => {} }
     : new FinalizationRegistry(ptr => wasm.__wbg_sha1hasher_free(ptr >>> 0, 1));
 
@@ -104,25 +126,25 @@ export class Sha1Hasher {
         ptr = ptr >>> 0;
         const obj = Object.create(Sha1Hasher.prototype);
         obj.__wbg_ptr = ptr;
-        Sha1HasherFinalization.register(obj, obj.__wbg_ptr, obj);
+        Sha1HasherFinalization;
         return obj;
     }
 
     __destroy_into_raw() {
         const ptr = this.__wbg_ptr;
         this.__wbg_ptr = 0;
-        Sha1HasherFinalization.unregister(this);
+        Sha1HasherFinalization;
         return ptr;
     }
 
-    free() {
+    [Symbol.dispose]() {
         const ptr = this.__destroy_into_raw();
         wasm.__wbg_sha1hasher_free(ptr, 0);
     }
     constructor() {
         const ret = wasm.sha1hasher_new();
         this.__wbg_ptr = ret >>> 0;
-        Sha1HasherFinalization.register(this, this.__wbg_ptr, this);
+        Sha1HasherFinalization;
         return this;
     }
     /**
@@ -251,7 +273,7 @@ async function __wbg_init(module_or_path) {
     }
 
     if (typeof module_or_path === 'undefined') {
-        module_or_path = new URL('sha1_wasm_bg.wasm', import.meta.url);
+        throw new Error();
     }
     const imports = __wbg_get_imports();
 

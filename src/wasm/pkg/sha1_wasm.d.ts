@@ -2,13 +2,26 @@
 /* eslint-disable */
 export function sha1(data: Memory): Memory;
 export class Memory {
-  free(): void;
+  [Symbol.dispose](): void;
+/**
+* @param {Uint8Array} inner
+*/
   constructor(inner: Uint8Array);
+/**
+* @returns {number}
+*/
   ptr(): number;
+/**
+* @returns {number}
+*/
   len(): number;
+/**
+* @returns {Uint8Array}
+*/
+  get bytes(): Uint8Array;
 }
 export class Sha1Hasher {
-  free(): void;
+  [Symbol.dispose](): void;
   constructor();
   clone(): Sha1Hasher;
   update(data: Memory): void;
