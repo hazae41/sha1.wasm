@@ -1,49 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
-/**
-* @param {Memory} data
-* @returns {Memory}
-*/
 export function sha1(data: Memory): Memory;
-/**
-*/
 export class Memory {
-  [Symbol.dispose](): void;
-/**
-* @param {Uint8Array} inner
-*/
+  free(): void;
   constructor(inner: Uint8Array);
-/**
-* @returns {number}
-*/
   ptr(): number;
-/**
-* @returns {number}
-*/
   len(): number;
-/**
-* @returns {Uint8Array}
-*/
-  get bytes(): Uint8Array;
 }
-/**
-*/
 export class Sha1Hasher {
-  [Symbol.dispose](): void;
-/**
-*/
+  free(): void;
   constructor();
-/**
-* @returns {Sha1Hasher}
-*/
   clone(): Sha1Hasher;
-/**
-* @param {Memory} data
-*/
   update(data: Memory): void;
-/**
-* @returns {Memory}
-*/
   finalize(): Memory;
 }
 
@@ -61,7 +29,9 @@ export interface InitOutput {
   readonly memory_new: (a: number, b: number) => number;
   readonly memory_ptr: (a: number) => number;
   readonly memory_len: (a: number) => number;
+  readonly __wbindgen_export_0: WebAssembly.Table;
   readonly __wbindgen_malloc: (a: number, b: number) => number;
+  readonly __wbindgen_start: () => void;
 }
 
 export type SyncInitInput = BufferSource | WebAssembly.Module;

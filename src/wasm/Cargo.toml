@@ -17,6 +17,6 @@ debug = false
 opt-level = 3
 
 [dependencies]
-wasm-bindgen = { version = "0.2.93", default-features = false }
+wasm-bindgen = { version = "0.2.100", default-features = false }
 sha1 = { version = "0.10.6", default-features = false }
 memory_wasm = { path = "../../node_modules/@hazae41/memory.wasm/dist/wasm"}
